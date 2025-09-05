@@ -66,11 +66,11 @@ By Mikayla Hubbard & Luanne Plemmons
 	- Potential for changing password (future feature)
 
 ## Forms:
-Login/Register
-Logout
-Editing
-Registering for a booking
-Canceling booking
-Creating booking (list of seats)
-Deleting booking
-Contact Us
+Login/Register  
+Logout  
+Editing  
+Registering for a booking  
+Canceling booking  
+Creating booking (list of seats)  
+Deleting booking  
+Contact Us  
