@@ -1,9 +1,9 @@
 ## Online Event Ticketing System
 By Mikayla Hubbard & Luanne Plemmons
 
-**Frontend:** React
-**Backend:** Django
-**Data:** SQL type
+**Frontend:** React  
+**Backend:** Django  
+**Data:** SQL type  
 
 ## Functional Requirements
 *1. User Roles:* Customer, Administrator.  
@@ -48,22 +48,22 @@ By Mikayla Hubbard & Luanne Plemmons
 
 ## Administrator View:
 - Upcoming events (list)
-	- list of events (reports of ticket sales)
+	- List of events (reports of ticket sales)
 - click on event -> details page (Editing button, reports of ticket sales)
 - Add events (form)
-	- title
-	- description
-	- picture
-	- date/time (prevent double booking)
-	- set ticket prices
-	- number of seats
-	- location (building, room) (prevent double booking)
+	- Title
+	- Description
+	- Picture
+	- Date/time (prevent double booking)
+	- Set ticket prices
+	- Number of seats
+	- Location (building, room) (prevent double booking)
 	- More details (optional)
 - History of events (list)
 - Logout (button -> popup -> “Are you sure you want to logout?”)
 - Person icon -> click -> list of personal details
-	- potential for editing info (future feature)
-	- potential for changing password (ff)
+	- Potential for editing info (future feature)
+	- Potential for changing password (future feature)
 
 ## Forms:
 Login/Register
@@ -74,5 +74,3 @@ Canceling booking
 Creating booking (list of seats)
 Deleting booking
 Contact Us
-
-
