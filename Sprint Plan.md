@@ -55,22 +55,22 @@ Admin: add/edit/delete events.
 
 **Sprint 4: Extended Features & Hardening (Week 7–8)**
 
-Testing and Verification
+*Testing and Verification*
 
 *Optional Features:*
 
-Seat map visualization (if time permits).
+- Seat map visualization (if time permits).
 
-Simulated payment gateway.
+- Simulated payment gateway.
 
-Email confirmations.
+- Email confirmations.
 
 *Non-Functional Requirements:*
 
-Security checks (password handling, role validation).
+- Security checks (password handling, role validation).
 
-Performance testing (200+ concurrent bookings).
+- Performance testing (200+ concurrent bookings).
 
-Reliability checks (prevent overbooking).
+- Reliability checks (prevent overbooking).
 
 *Deliverable: *Extended usability + tested system ready for demo.
