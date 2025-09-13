@@ -39,11 +39,11 @@
 
 *Backend:*
 
-Booking history (per customer).
+- Booking history (per customer).
 
-Cancel booking (before event date).
+- Cancel booking (before event date).
 
-Admin: add/edit/delete events.
+- Admin: add/edit/delete events.
 
 *Frontend:*
 
