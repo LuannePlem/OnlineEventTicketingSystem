@@ -55,7 +55,7 @@ ROOT_URLCONF = 'OTS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['OTS_APP/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
