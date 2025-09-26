@@ -7,13 +7,13 @@ By Mikayla Hubbard & Luanne Plemmons
 
 ## Functional Requirements
 *1. User Roles:* Customer, Administrator.  
-*2. Authentication:* Login system with role-based access.
+*2. Authentication:* Login system with role-based access.  
 *3. Customer Features:*
 - Browse list of events and available seats.
 - Book tickets for chosen event.
    - Cancel booking before the event date.
    - View booking history.
-*4. Administrator Features:*
+*4. Administrator Features:*  
    - Add, update, or delete events.
    - Set ticket prices and seat limits.
    - Generate reports of ticket sales.
