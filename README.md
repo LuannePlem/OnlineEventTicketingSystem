@@ -1,7 +1,7 @@
 ## Online Event Ticketing System
 By Mikayla Hubbard & Luanne Plemmons
 
-**Frontend:** React  
+**Frontend:** Django  
 **Backend:** Django  
 **Data:** SQL type  
 
