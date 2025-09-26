@@ -12,7 +12,8 @@ By Mikayla Hubbard & Luanne Plemmons
 - Browse list of events and available seats.
 - Book tickets for chosen event.
    - Cancel booking before the event date.
-   - View booking history.  
+   - View booking history.
+  
 *4. Administrator Features:*  
    - Add, update, or delete events.
    - Set ticket prices and seat limits.
