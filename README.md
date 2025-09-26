@@ -1,8 +1,7 @@
 ## Online Event Ticketing System
 By Mikayla Hubbard & Luanne Plemmons
 
-**Frontend:** Django  
-**Backend:** Django  
+**Frontend / Backend:** Django  
 **Data:** SQL type  
 
 ## Functional Requirements
