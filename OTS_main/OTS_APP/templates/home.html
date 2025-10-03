@@ -9,6 +9,11 @@
   <body>
     <h1>This is the home page</h1>
     <p>Mikayla is adding a Lineeeee</p>
-    <h1>This is the home page. Luanne's edits!!! </h1>
+    <h1>This is the home page. Luanne's edits!!!</h1>
+
+    <form method="post">
+      {% csrf_token %} {{ registration_form }}
+      <input type="submit" value="Submit" />
+    </form>
   </body>
 </html>
