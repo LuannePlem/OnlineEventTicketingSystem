@@ -8,9 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns  # Static fi
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('admin/', admin.site.urls),
-
+    path('', views.home, name='home')
 ] 
 #  Serve media files if DEBUG is True (development mode)
 if settings.DEBUG:
