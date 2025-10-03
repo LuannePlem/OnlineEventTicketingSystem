@@ -14,7 +14,7 @@ class User(AbstractUser):
 # ----------------------------
 # Administrative Users
 # ----------------------------
-class Admin(User):
+class Administrator(User):
     total_tickets_sold = models.IntegerField()
     num_current_events = models.IntegerField()
     num_past_events = models.IntegerField()
