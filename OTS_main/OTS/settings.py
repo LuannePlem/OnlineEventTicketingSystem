@@ -74,10 +74,14 @@ WSGI_APPLICATION = 'OTS.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+      'default': {
+          'ENGINE': 'django.db.backends.mysql',
+          'NAME': 'OTS_DB',  # Replace with your MySQL database name
+          'USER': 'root',    # Replace with your MySQL username
+          'PASSWORD': 'a1b2SQL04!!', # Replace with your MySQL password
+          'HOST': 'localhost',             # Or your MySQL server's IP/hostname
+          'PORT': '3306',                  # Default MySQL port
+      }
 }
 
 
