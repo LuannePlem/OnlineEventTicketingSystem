@@ -10,9 +10,9 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "username": "root",
-            "database": "mysql",
-            "password": "a1b2SQL04!!",
+            "username": "shared_user",
+            "database": "OTS_db",
+            "password": "SuperSecretPassword123?",
             "name": "OTS_DB"
         }
     ]

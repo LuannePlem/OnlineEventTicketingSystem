@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'OTS.wsgi.application'
 DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.mysql',
-          'NAME': 'mysql',  # Replace with your MySQL database name
-          'USER': 'root',    # Replace with your MySQL username
-          'PASSWORD': 'a1b2SQL04!!', # Replace with your MySQL password
+          'NAME': 'OTS_db',  # Replace with your MySQL database name
+          'USER': 'shared_user',    # Replace with your MySQL username
+          'PASSWORD': 'SuperSecretPassword123?', # Replace with your MySQL password
           'HOST': 'localhost',       # Or your MySQL server's IP/hostname
           'PORT': '3306',           # Default MySQL port
       }
