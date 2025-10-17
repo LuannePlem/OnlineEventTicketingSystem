@@ -9,20 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
   </head>
-  <body style="background-color:powderblue;">
-    
-    <h1>HOME</h1>
+  
+<body style="background-color:powderblue;">
+    <h1 class="m-3">HOME</h1>
     <form method="post">
       {% csrf_token %} 
-      <p >{{ registration_form.username.label_tag }} {{ registration_form.username }}</p>
-      <p>{{ registration_form.email.label_tag }} {{ registration_form.email }}</p>
-      <p>{{ registration_form.first_name.label_tag }} {{ registration_form.first_name }}</p>
-      <p>{{ registration_form.last_name.label_tag }} {{ registration_form.last_name }}</p>
-      <p>{{ registration_form.age.label_tag }} {{ registration_form.age }}</p>
-      <p>{{ registration_form.usertype.label_tag }} {{ registration_form.usertype }}</p>
-      <p>{{ registration_form.password1.label_tag }} {{ registration_form.password1 }}</p>
-      <p>{{ registration_form.password2.label_tag }} {{ registration_form.password2 }}</p>
+      <p style="margin: 20pt;">{{ registration_form.username.label_tag }} {{ registration_form.username }}</p>
+      <p style="margin: 20pt;">{{ registration_form.email.label_tag }} {{ registration_form.email }}</p>
+      <p style="margin: 20pt;">{{ registration_form.first_name.label_tag }} {{ registration_form.first_name }}</p>
+      <p style="margin: 20pt;">{{ registration_form.last_name.label_tag }} {{ registration_form.last_name }}</p>
+      <p style="margin: 20pt;">{{ registration_form.age.label_tag }} {{ registration_form.age }}</p>
+      <p style="margin: 20pt;">{{ registration_form.usertype.label_tag }} {{ registration_form.usertype }}</p>
+      <p style="margin: 20pt;">{{ registration_form.password1.label_tag }} {{ registration_form.password1 }}</p>
+      <p style="margin: 20pt;">{{ registration_form.password2.label_tag }} {{ registration_form.password2 }}</p>
       <input type="submit" value="Register" />
-    </form>
-  </body>
+    </form>  
+</body>
 </html>
