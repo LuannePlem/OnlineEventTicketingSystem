@@ -9,16 +9,19 @@ class User(AbstractUser):
     age = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return self.username
     
 # ----------------------------
 # Administrative Users
 # ----------------------------
 class Manager(User):
-    total_tickets_sold = models.IntegerField()
-    num_current_events = models.IntegerField()
-    num_past_events = models.IntegerField()
-    total_income = models.FloatField()
+    total_tickets_sold = models.IntegerField(default=0)
+    num_current_events = models.IntegerField(default=0)
+    num_past_events = models.IntegerField(default=0)
+    total_income = models.FloatField(default=0)
+    
+    def __str__(self):
+        return f"Manager: {self.username}"
 
 # ----------------------------
 # Customers
