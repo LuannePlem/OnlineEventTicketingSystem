@@ -61,3 +61,4 @@ def home(request):
         form = UserRegistrationForm()
     
     return render(request, "home.html", {"registration_form": form})
+
