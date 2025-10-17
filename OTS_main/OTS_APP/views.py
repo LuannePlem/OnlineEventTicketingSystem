@@ -10,7 +10,30 @@ def home(request):
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
-            # ...
+            new_user = None
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            f_name = form.cleaned_data['first_name']
+            l_name = form.cleaned_data['last_name']
+            age = form.cleaned_data['age']
+            user_type = form.cleaned_data['usertype']
+            # Create a new user
+            if user_type == "User":
+                new_user = User.objects.create_user(username=username, email=email, password=password)
+                
+            if user_type == "Manager":
+                base_user = User.objects.create_user( username=username,email=email,password=password)
+                new_user = Manager.objects.create(user_ptr=base_user)
+               
+            # set other attributes 
+            if new_user:
+                new_user.first_name = f_name
+                new_user.last_name = l_name
+                new_user.age = age
+                new_user.save()
+            
+            
             # redirect to a new URL:
             return HttpResponseRedirect("/")
 
