@@ -74,3 +74,31 @@ Canceling booking
 Creating booking (list of seats)  
 Deleting booking  
 Contact Us  
+
+## Views And Templates:
+
+      * = on navbar
+
+- landing page
+
+	- the only page a non-logged in viewer can see
+	- Explains the app and prompts to either login or register
+
+- Register page
+- login page
+
+
+- For User:
+  - home *
+  - Upcoming Events - events they haven't signed up for *
+  - Current bookings - events they are signed up for *
+  - Individual Event - details of the specific event
+  - Logout button (not a view) *
+
+- For Manager:
+  - home *
+  - upcoming events *
+  - Create New event
+  - Edit event
+  
+
