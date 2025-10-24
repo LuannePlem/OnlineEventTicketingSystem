@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <!-- Login form -->
+      <form
+        class="col-6 mx-auto card p-3 shadow-lg"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <!-- CSRF token for security -->
+
+        <!-- Login heading -->
+
+        <h3 class="text-center m-5">Are you sure you want to log out?</h3>
+
+        <!-- Display error/success messages -->
+        {% if messages %}
+        <div class="alert alert-primary" role="alert">
+          {% for message in messages %} {{ message }} {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-secondary" aria-label="log out">
+          Log out
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

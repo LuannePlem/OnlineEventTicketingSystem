@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,7 +29,7 @@
         </a>
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a href="/" class="nav-link active" aria-current="page">Home</a>
+            <a href="/" class="nav-link" aria-current="page">Home</a>
           </li>
           <li class="nav-item">
             <a href="/upcoming_events/" class="nav-link">Upcoming Events</a>
@@ -38,7 +37,9 @@
           <!--Display different options for user and manager -->
           {% if user.user_type == "user" %}
           <li class="nav-item">
-            <a href="/current_events/" class="nav-link">Current Bookings</a>
+            <a href="/current_events/" class="nav-link active"
+              >Current Bookings</a
+            >
           </li>
           {% else %}
           <li class="nav-item">
@@ -52,21 +53,6 @@
         </ul>
       </header>
     </div>
-
-    <h1>HOME</h1>
-    <h1 class="text-center display-4">Hello, {{ user.first_name }}!</h1>
-    <p>User type: {{ user.user_type }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
-    <p>email: {{ user.email }}</p>
-    <p>Username: {{ user.username }}</p>
-    <p>Password Hash: {{ user.password }}</p>
-    <p>age: {{ user.age}}</p>
-
-    {%else%}
-    <h1>HOME</h1>
-    <a href="register/">Register</a>
-    <a href="login/">Login</a>
-    {%endif%}
+    Current Bookings page {% endif %}
   </body>
 </html>
