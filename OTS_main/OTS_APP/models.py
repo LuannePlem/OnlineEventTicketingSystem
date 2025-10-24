@@ -7,8 +7,16 @@ from django.contrib.auth.models import AbstractUser
 # ----------------------------
 class User(AbstractUser):
     age = models.IntegerField()
-    user_type = "user"
-
+    USER_TYPE_CHOICES = [
+        ('user', 'User'),
+        ('manager', 'Manager'),
+    ]
+    user_type = models.CharField(
+        max_length=20,
+        choices=USER_TYPE_CHOICES,
+        default='user'
+    )
+    
     def __str__(self):
         return self.username
     
@@ -20,7 +28,6 @@ class Manager(User):
     num_current_events = models.IntegerField(default=0)
     num_past_events = models.IntegerField(default=0)
     total_income = models.FloatField(default=0)
-    user_type = "manager"
     
     def __str__(self):
         return f"Manager: {self.username}"
