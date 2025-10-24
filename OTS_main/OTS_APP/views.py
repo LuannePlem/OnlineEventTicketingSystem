@@ -72,7 +72,8 @@ def register(request):
                                 password=password,
                                 age=age,
                                 first_name=f_name,
-                                last_name=l_name
+                                last_name=l_name,
+                                user_type=user_type
                             )
             elif user_type == "manager":
                 new_user = Manager.objects.create_superuser(
@@ -85,7 +86,8 @@ def register(request):
                                 total_tickets_sold=0,
                                 num_current_events=0,
                                 num_past_events=0,
-                                total_income=0.0
+                                total_income=0.0,
+                                user_type=user_type
                             )
             else:
                     raise ValueError("Invalid user type")
