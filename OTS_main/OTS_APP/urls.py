@@ -19,7 +19,8 @@ urlpatterns = [
     path('upcoming_events/', views.upcoming, name="upcoming"),
     path('current_events/', views.current, name="current"),
     path('individual_event/', views.individualEvent, name="individualEvent"),
-    # path('create_events/', views.createEvent, name="createEvent"),
+   
+    path('create_events/', views.createEvent, name="createEvent"),
     # path('edit_events/', views.editEvent, name="editEvent"),
     
     
