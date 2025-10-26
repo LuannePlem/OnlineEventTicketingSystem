@@ -25,7 +25,7 @@
           <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"></use>
           </svg>
-          <span class="fs-4">Simple header</span>
+          <span class="fs-4">Home</span>
         </a>
         <ul class="nav nav-pills">
           <li class="nav-item">
@@ -50,7 +50,67 @@
           </li>
         </ul>
       </header>
-    </div>
-    Create Event Page {% endif %}
+    </div> 
+    <div class="container mt-5">
+        <!-- Create Event form -->
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  <!-- CSRF token for security -->
+            <h3>Create Event</h3>
+          
+            <!-- Event Name input field -->
+            <div class="form-group">
+                    <label for="exampleInputEmail1">Event Name</label>
+                    <input type="text" class="form-control"
+                        placeholder="Enter Event Name" name="event_title" required>
+            </div>
+          
+            <!-- Event Subtitle input field -->
+            <div class="form-group">
+                    <label for="exampleInputEmail1">Event Subtitle</label>
+                    <input type="text" class="form-control"
+                        placeholder="Enter Event Subtitle" name="event_subtitle">
+            </div>
+
+            <!-- Event Date input field -->
+            <div class="form-group">
+                    <label for="exampleInputEmail1">Event Date</label>
+                    <input type="date" class="form-control"
+                        placeholder="Enter Event Date" name="event_date">
+            </div>
+
+            <!-- Event Time input field -->
+            <div class="form-group">
+                    <label for="exampleInputEmail1">Event Time</label>
+                    <input type="time" class="form-control"
+                        placeholder="Enter Event Time" name="event_time">
+            </div>
+
+            <!-- Event Price input field -->
+            <div class="form-group">
+                    <label for="exampleInputEmail1">Event Price</label>
+                    <input type="number" class="form-control"
+                        placeholder="e.g., 12.00, 15.00 ..." name="event_price">
+            </div>
+
+            <!-- Event Location input field -->
+            <div class="form-group">
+                    <label for="Location">Event Location</label>
+                    <input type="text" class="form-control"
+                        placeholder="e.g., New York City, USA" name="event_time">
+            </div>
+            
+            <!-- Event Seat Amount input field -->
+            <div class="form-group">
+                    <label for="Amount">Available Seats</label>
+                    <input type="number" class="form-control"
+                        placeholder="e.g., 20" name="event_time">
+            </div>
+
+            <div class="mt-3">
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-secondary" aria-label="submit">Create Event</button>
+            </div>
+        </form>
+        {% endif %}
   </body>
 </html>
