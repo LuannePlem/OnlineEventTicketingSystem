@@ -1,0 +1,178 @@
+/* ================================
+   Custom Bootstrap Theme Overrides
+   Compatible with Bootstrap 5.3+
+   ================================ */
+
+/* Light theme (default) */
+:root,
+[data-bs-theme="light"] {
+  /* Core theme palette */
+  --bs-primary:   #9db99c;  /* your main color */
+  --bs-secondary: #608b5f;
+  --bs-success:   #28a745;
+  --bs-info:      #17a2b8;
+  --bs-warning:   #ffc107;
+  --bs-danger:    #dc3545;
+  --bs-light:     #f8f9fa;
+  --bs-dark:      #343a40;
+
+  /* Text color helpers */
+  --bs-link-color: var(--bs-primary);
+  --bs-link-hover-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+
+  /* Optional: tweak global background/text */
+  --bs-body-bg: #ffffff;
+  --bs-body-color: #212529;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-primary) 85%, black);
+  --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 75%, black);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 75%, black);
+}
+
+.btn-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+  --bs-btn-hover-bg: color-mix(in srgb, var(--bs-secondary) 85%, black);
+  --bs-btn-hover-border-color: color-mix(in srgb, var(--bs-secondary) 85%, black);
+  --bs-btn-active-bg: color-mix(in srgb, var(--bs-secondary) 75%, black);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--bs-secondary) 75%, black);
+}
+
+/* Optional: Adjust hover transitions */
+.btn {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* ================================
+   Outline Buttons
+   ================================ */
+.btn-outline-primary {
+  --bs-btn-color: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-hover-border-color: var(--bs-primary);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: color-mix(in srgb, var(--bs-primary) 80%, black);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--bs-primary) 80%, black);
+  --bs-btn-disabled-color: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--bs-secondary);
+  --bs-btn-border-color: var(--bs-secondary);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--bs-secondary);
+  --bs-btn-hover-border-color: var(--bs-secondary);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: color-mix(in srgb, var(--bs-secondary) 80%, black);
+  --bs-btn-active-border-color: color-mix(in srgb, var(--bs-secondary) 80%, black);
+  --bs-btn-disabled-color: var(--bs-secondary);
+  --bs-btn-disabled-border-color: var(--bs-secondary);
+}
+
+
+/* ================================
+   Alerts
+   ================================ */
+.alert-primary {
+  --bs-alert-bg: color-mix(in srgb, var(--bs-primary) 20%, white);
+  --bs-alert-border-color: var(--bs-primary);
+  --bs-alert-color: color-mix(in srgb, var(--bs-primary) 60%, black);
+}
+
+.alert-secondary {
+  --bs-alert-bg: color-mix(in srgb, var(--bs-secondary) 20%, white);
+  --bs-alert-border-color: var(--bs-secondary);
+  --bs-alert-color: color-mix(in srgb, var(--bs-secondary) 60%, black);
+}
+
+/* ================================
+   Badges
+   ================================ */
+.badge.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+
+.badge.bg-secondary {
+  background-color: var(--bs-secondary) !important;
+}
+
+/* ================================
+   Text & Background Utilities
+   ================================ */
+.text-primary { color: var(--bs-primary) !important; }
+.text-secondary { color: var(--bs-secondary) !important; }
+
+.bg-primary { background-color: var(--bs-primary) !important; }
+.bg-secondary { background-color: var(--bs-secondary) !important; }
+
+
+/* ===========================
+   Nav link active / current
+   =========================== */
+
+/* Generic nav-link active */
+.nav-link.active,
+.nav-link.show {
+  color: var(--bs-primary) !important;              /* text color when active */
+  background-color: transparent;                    /* keep transparent unless you want filled */
+}
+
+/* If you're using nav-pills (usually wants background) */
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.show {
+  color: #fff !important;                           /* white text on filled pill */
+  background-color: var(--bs-primary) !important;   /* pill background uses primary */
+  border-color: var(--bs-primary) !important;
+}
+
+/* nav-tabs active (tab-like with border and bg) */
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link.show {
+  color: var(--bs-primary) !important;
+  background-color: transparent;                    /* or var(--bs-body-bg) if you prefer filled */
+  border-color: var(--bs-primary) var(--bs-primary) transparent;
+}
+
+/* Navbar links that need a colored underline / bg */
+.navbar .nav-link.active,
+.navbar .nav-item .nav-link.active {
+  color: var(--bs-primary) !important;
+}
+
+/* Hover & focus for nav links (non-active) */
+.nav-link:hover,
+.nav-link:focus {
+  color: color-mix(in srgb, var(--bs-primary) 80%, black) !important;
+  text-decoration: none;
+}
+
+/* If you want "current" links to also carry the same bg as pills when inside a .nav (optional) */
+.nav .nav-link.active {
+  background-color: var(--bs-primary) !important;
+  color: #fff !important;
+}
+
+/* Dark mode support example (when using data-bs-theme="dark") */
+[data-bs-theme="dark"] .nav-pills .nav-link.active,
+[data-bs-theme="dark"] .nav .nav-link.active {
+  color: #000 !important; /* or a contrast color for your chosen primary */
+  background-color: var(--bs-primary) !important;
+}
+
+/* Optional: transition for nicer effect */
+.nav-link {
+  transition: color 0.12s ease, background-color 0.12s ease, border-color 0.12s ease;
+}
