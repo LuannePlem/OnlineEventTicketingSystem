@@ -1,4 +1,11 @@
 <html lang="en">
+<style>
+  .navbar-brand span {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+</style>
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,82 +21,80 @@
   </head>
   <body>
     {% if user.is_authenticated %}
-    <div class="container">
-      <header
-        class="d-flex flex-wrap justify-content-center py-3 border-bottom"
-      >
-        <a
-          href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-        >
-          <svg class="bi me-2" width="40" height="32">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+      <div class="container">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+          <svg class="bi me-2" width="32" height="32">
             <use xlink:href="#bootstrap"></use>
           </svg>
-          <span class="fs-4">Home</span>
+          <span>HOME</span>
         </a>
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a href="/" class="nav-link" aria-current="page">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="/upcoming_events/" class="nav-link">Upcoming Events</a>
-          </li>
-          <!--Display different options for user and manager -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="/upcoming_events/" class="nav-link">Upcoming Events</a></li>
+
           {% if user.user_type == "user" %}
-          <li class="nav-item">
-            <a href="/current_events/" class="nav-link">Current Bookings</a>
-          </li>
+          <li class="nav-item"><a href="/current_events/" class="nav-link">Current Bookings</a></li>
           {% else %}
-          <li class="nav-item">
-            <a href="/create_events/" class="nav-link active">New Event </a>
-          </li>
+          <li class="nav-item"><a href="/create_events/" class="nav-link">New Event</a></li>
           {% endif %}
 
-          <li class="nav-item">
-            <a href="/logout/" class="nav-link">Log Out</a>
-          </li>
+          <li class="nav-item"><a href="/logout/" class="nav-link text-danger">Logout</a></li>
         </ul>
-      </header>
-    </div> 
+      </div>
+    </nav>
+
     <div class="container mt-5">
         <!-- Create Event form -->
         <form class="col-6 mx-auto card p-3 shadow-lg" method="post">
         {% csrf_token %}
-        <h3>Create Event</h3>
-
+        <h3 class="text-center fw-bold">Create Event</h3>
+        
         <div class="form-group">
-          <label>Event Name</label>
+          <label class="text-muted">Event Name</label>
           <input type="text" class="form-control" name="event_title" required>
         </div>
 
         <div class="form-group">
-          <label>Event Subtitle</label>
+          <label class="text-muted">Event Subtitle</label>
           <input type="text" class="form-control" name="event_subtitle">
         </div>
 
         <div class="form-group">
-          <label>Event Date</label>
+          <label class="text-muted">Event Date</label>
           <input type="date" class="form-control" name="event_date">
         </div>
 
         <div class="form-group">
-          <label>Event Time</label>
+          <label class="text-muted">Event Time</label>
           <input type="time" class="form-control" name="event_time">
         </div>
 
         <div class="form-group">
-          <label>Event Price</label>
+          <label class="text-muted">Event Price</label>
           <input type="number" class="form-control" name="event_price" step="0.01">
         </div>
 
         <div class="form-group">
-          <label>Event Location</label>
+          <label class="text-muted">Event Location</label>
           <input type="text" class="form-control" name="event_location">
         </div>
 
         <div class="form-group">
-          <label>Available Seats</label>
+          <label class="text-muted">Available Seats</label>
           <input type="number" class="form-control" name="available_seats">
+        </div>
+
+        <div>
+          <label for="creator" class="text-muted">Creator</label>
+          <input type="text"
+              class="form-control"
+              id="creator"
+              name="creator"
+              value="{{ request.user.username }}"
+              readonly>
         </div>
 
         <div class="mt-3">
