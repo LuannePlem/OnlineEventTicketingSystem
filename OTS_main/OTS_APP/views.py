@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import *
+from .models import *
+
 # Home page view
 def home(request):
     current_user = request.user
@@ -134,7 +136,46 @@ def individualEvent(request):
     return render(request, "individualEvent.html")
 
 def createEvent(request):
+    if request.method == "POST":
+        event_title = request.POST.get("event_title")
+        event_subtitle = request.POST.get("event_subtitle")
+        event_date = request.POST.get("event_date")
+        event_time = request.POST.get("event_time")
+        event_price = request.POST.get("event_price")
+        event_location = request.POST.get("event_location")
+        available_seats = request.POST.get("available_seats")
+
+        # Validate required fields
+        if not event_title or not event_date:
+            messages.error(request, "Event name and date are required.")
+            return render(request, "createEvent.html")
+
+        try:
+            # Try creating the event
+            Event.objects.create(
+                event_title=event_title,
+                event_subtitle=event_subtitle,
+                event_date=event_date,
+                event_time=event_time,
+                event_price=float(event_price) if event_price else 0.0,
+                event_location=event_location,
+                available_seats=int(available_seats) if available_seats else 0,
+            )
+
+            messages.success(request, "Event created successfully!")
+            return redirect("/upcoming_events/")
+
+        except ValueError:
+            # Handle invalid conversions (e.g., non-numeric price/seats)
+            messages.error(request, "Please enter valid numbers for price and seats.")
+            return render(request, "createEvent.html")
+        except Exception as e:
+            # Catch-all for unexpected errors
+            messages.error(request, f"An unexpected error occurred: {e}")
+            return render(request, "createEvent.html")
+
     return render(request, "createEvent.html")
+
 
 def editEvent(request):
     return render(request, "editEvent.html")
