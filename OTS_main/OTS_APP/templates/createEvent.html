@@ -53,64 +53,50 @@
     </div> 
     <div class="container mt-5">
         <!-- Create Event form -->
-        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
-            {% csrf_token %}  <!-- CSRF token for security -->
-            <h3>Create Event</h3>
-          
-            <!-- Event Name input field -->
-            <div class="form-group">
-                    <label for="exampleInputEmail1">Event Name</label>
-                    <input type="text" class="form-control"
-                        placeholder="Enter Event Name" name="event_title" required>
-            </div>
-          
-            <!-- Event Subtitle input field -->
-            <div class="form-group">
-                    <label for="exampleInputEmail1">Event Subtitle</label>
-                    <input type="text" class="form-control"
-                        placeholder="Enter Event Subtitle" name="event_subtitle">
-            </div>
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post">
+        {% csrf_token %}
+        <h3>Create Event</h3>
 
-            <!-- Event Date input field -->
-            <div class="form-group">
-                    <label for="exampleInputEmail1">Event Date</label>
-                    <input type="date" class="form-control"
-                        placeholder="Enter Event Date" name="event_date">
-            </div>
+        <div class="form-group">
+          <label>Event Name</label>
+          <input type="text" class="form-control" name="event_title" required>
+        </div>
 
-            <!-- Event Time input field -->
-            <div class="form-group">
-                    <label for="exampleInputEmail1">Event Time</label>
-                    <input type="time" class="form-control"
-                        placeholder="Enter Event Time" name="event_time">
-            </div>
+        <div class="form-group">
+          <label>Event Subtitle</label>
+          <input type="text" class="form-control" name="event_subtitle">
+        </div>
 
-            <!-- Event Price input field -->
-            <div class="form-group">
-                    <label for="exampleInputEmail1">Event Price</label>
-                    <input type="number" class="form-control"
-                        placeholder="e.g., 12.00, 15.00 ..." name="event_price">
-            </div>
+        <div class="form-group">
+          <label>Event Date</label>
+          <input type="date" class="form-control" name="event_date">
+        </div>
 
-            <!-- Event Location input field -->
-            <div class="form-group">
-                    <label for="Location">Event Location</label>
-                    <input type="text" class="form-control"
-                        placeholder="e.g., New York City, USA" name="event_time">
-            </div>
-            
-            <!-- Event Seat Amount input field -->
-            <div class="form-group">
-                    <label for="Amount">Available Seats</label>
-                    <input type="number" class="form-control"
-                        placeholder="e.g., 20" name="event_time">
-            </div>
+        <div class="form-group">
+          <label>Event Time</label>
+          <input type="time" class="form-control" name="event_time">
+        </div>
 
-            <div class="mt-3">
-            <!-- Submit button -->
-            <button type="submit" class="btn btn-secondary" aria-label="submit">Create Event</button>
-            </div>
-        </form>
+        <div class="form-group">
+          <label>Event Price</label>
+          <input type="number" class="form-control" name="event_price" step="0.01">
+        </div>
+
+        <div class="form-group">
+          <label>Event Location</label>
+          <input type="text" class="form-control" name="event_location">
+        </div>
+
+        <div class="form-group">
+          <label>Available Seats</label>
+          <input type="number" class="form-control" name="available_seats">
+        </div>
+
+        <div class="mt-3">
+          <button type="submit" class="btn btn-secondary">Create Event</button>
+        </div>
+      </form>
+
         {% endif %}
   </body>
 </html>
