@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 # ----------------------------
 # Users table
@@ -49,6 +50,14 @@ class Event(models.Model):
     event_price = models.FloatField()
     event_location = models.CharField(max_length=200)
     available_seats = models.PositiveIntegerField()
+    
+    def isDatePassed(self) -> bool:
+        currentDate = datetime.now().date()
+        currentTime = datetime.now().time()
+        if currentDate > self.event_date or (currentDate == self.date and currentTime > self.event_time):
+            return True
+        else:
+            return False
 
     def __str__(self):
         return f"{self.event_title} ({self.event_date})"

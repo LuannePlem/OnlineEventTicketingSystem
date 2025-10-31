@@ -53,8 +53,10 @@
         </ul>
       </header>
     </div>
-    Upcoming events page 
-    
-    {% endif %}
+    {% for event in events %}
+    <p>{{ event }}</p>
+    <p>Title: {{ event.event_title }}</p>
+    <p>Subtitle: {{ event.event_subtitle }}</p>
+    {% endfor %} {% endif %}
   </body>
 </html>
