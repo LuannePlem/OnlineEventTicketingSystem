@@ -174,6 +174,7 @@ def createEvent(request):
                 event_price=float(event_price) if event_price else 0.0,
                 event_location=event_location,
                 available_seats=int(available_seats) if available_seats else 0,
+                creator=request.user
             )
 
             messages.success(request, "Event created successfully!")

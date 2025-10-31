@@ -50,6 +50,13 @@ class Event(models.Model):
     event_price = models.FloatField()
     event_location = models.CharField(max_length=200)
     available_seats = models.PositiveIntegerField()
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="created_events",
+        null=True,      # allow temporary nulls
+        blank=True
+    )
     
     def isDatePassed(self) -> bool:
         currentDate = datetime.now().date()
