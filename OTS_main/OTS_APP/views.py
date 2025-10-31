@@ -127,10 +127,24 @@ def landingPage(request):
     return render(request, "landingPage.html")
 
 def upcoming(request):
-    return render(request, "upcoming.html")
+    current_user = request.user
+    events = Event.objects.all
+    context = {
+        'user': current_user,
+        'events': events,
+    }
+    
+    return render(request, "upcoming.html", context)
 
 def current(request):
-    return render(request, "current.html")
+    current_user = request.user
+    events = Event.objects
+    context = {
+        'user': current_user,
+        'events': events
+    }
+    
+    return render(request, "current.html", context)
 
 def individualEvent(request):
     return render(request, "individualEvent.html")
