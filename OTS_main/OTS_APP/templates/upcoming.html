@@ -53,10 +53,48 @@
         </ul>
       </header>
     </div>
-    {% for event in events %}
-    <p>{{ event }}</p>
-    <p>Title: {{ event.event_title }}</p>
-    <p>Subtitle: {{ event.event_subtitle }}</p>
-    {% endfor %} {% endif %}
+    <!-- Intro -->
+    <div class="py-5 text-center container m-0 bg-light">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Upcoming Events</h1>
+          <p class="lead text-muted">
+            Here, you can find all the upcoming events. Feel free to browse and
+            register for any event that interests you!
+          </p>
+          <p class="small text-muted">
+            You can view all your registered events in the 'Current Bookings'
+            section.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Display Available Events -->
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+      {% for event in events %}
+      <div class="col mt-3 m-5">
+        <div class="card mb-4 rounded-3 border-0 shadow-sm bg-light">
+          <div class="card-header border-0 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>{{event.event_date}}</div>
+              <div>{{event.event_time}}</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title">{{ event.event_title }}</h1>
+            <p>{{ event.event_subtitle }}</p>
+            <h1 class="card-title pricing-card-title">
+              ${{event.event_price}}<small class="text-muted fw-light"
+                >/seat</small
+              >
+            </h1>
+            <button type="button" class="btn m-3 btn-lg btn-outline-primary">
+              Book Event
+            </button>
+            {% endfor %} {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
