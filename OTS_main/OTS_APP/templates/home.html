@@ -1,4 +1,26 @@
 <!DOCTYPE html>
+<style>
+    body {
+      background-color: #ffffff;
+    }
+    .profile-card {
+      max-width: 600px;
+      margin: 3rem auto;
+      background: rgb(157, 185, 156);
+      border-radius: 1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      padding: 2rem;
+    }
+    .pmargin {
+      margin-bottom: 0.4rem;
+      font-size: 1.05rem;
+    }
+    .navbar-brand span {
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+</style>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,58 +37,58 @@
   </head>
   <body>
     {% if user.is_authenticated %}
-    <div class="container">
-      <header
-        class="d-flex flex-wrap justify-content-center py-3 border-bottom"
-      >
-        <a
-          href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-        >
-          <svg class="bi me-2" width="40" height="32">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+      <div class="container">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+          <svg class="bi me-2" width="32" height="32">
             <use xlink:href="#bootstrap"></use>
           </svg>
-          <span class="fs-4">Home</span>
+          <span>HOME</span>
         </a>
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a href="/" class="nav-link active" aria-current="page">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="/upcoming_events/" class="nav-link">Upcoming Events</a>
-          </li>
-          <!--Display different options for user and manager -->
+
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="/upcoming_events/" class="nav-link">Upcoming Events</a></li>
+
           {% if user.user_type == "user" %}
-          <li class="nav-item">
-            <a href="/current_events/" class="nav-link">Current Bookings</a>
-          </li>
+          <li class="nav-item"><a href="/current_events/" class="nav-link">Current Bookings</a></li>
           {% else %}
-          <li class="nav-item">
-            <a href="/create_events/" class="nav-link">New Event </a>
-          </li>
+          <li class="nav-item"><a href="/create_events/" class="nav-link">New Event</a></li>
           {% endif %}
 
-          <li class="nav-item">
-            <a href="/logout/" class="nav-link">Log Out</a>
-          </li>
+          <li class="nav-item"><a href="/logout/" class="nav-link text-danger">Logout</a></li>
         </ul>
-      </header>
+      </div>
+    </nav>
+
+    <!-- Welcome Header -->
+    <div class="text-center mt-5">
+      <h1 class="display-5 fw-bold">Welcome, {{ user.first_name|default:user.username }}!</h1>
+      <p class="text-muted">"Before anything else, preparation is the key to success"</p>
     </div>
 
-    <h1>HOME</h1>
-    <h1 class="text-center display-4">Hello, {{ user.first_name }}!</h1>
-    <p>User type: {{ user.user_type }}</p>
-    <p>First name: {{ user.first_name }}</p>
-    <p>Last name: {{ user.last_name }}</p>
-    <p>email: {{ user.email }}</p>
-    <p>Username: {{ user.username }}</p>
-    <p>Password Hash: {{ user.password }}</p>
-    <p>age: {{ user.age}}</p>
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <h4 class="mb-3 text-center">Profile Information</h4>
+      <hr>
 
-    {%else%}
-    <h1>HOME</h1>
-    <a href="register/">Register</a>
-    <a href="login/">Login</a>
-    {%endif%}
+      <p class="pmargin"><strong>User Type:</strong> {{ user.user_type }}</p>
+      <p class="pmargin"><strong>First Name:</strong> {{ user.first_name }}</p>
+      <p class="pmargin"><strong>Last Name:</strong> {{ user.last_name }}</p>
+      <p class="pmargin"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="pmargin"><strong>Username:</strong> {{ user.username }}</p>
+      <p class="pmargin"><strong>Age:</strong> {{ user.age }}</p>
+    </div>
+
+    {% else %}
+    <!-- Not logged in -->
+    <div class="container text-center mt-5">
+      <h1 class="display-4 mb-3">Welcome to Eventify</h1>
+      <p class="lead text-muted mb-4">Discover and book exciting events near you.</p>
+      <a href="/register/" class="btn btn-outline-primary btn-lg me-2">Register</a>
+      <a href="/login/" class="btn btn-primary btn-lg">Login</a>
+    </div>
+    {% endif %}
   </body>
 </html>
