@@ -31,14 +31,14 @@
           <span>HOME</span>
         </a>
 
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a href="/" class="nav-link active">Home</a></li>
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="/upcoming_events/" class="nav-link">Upcoming Events</a></li>
 
           {% if user.user_type == "user" %}
           <li class="nav-item"><a href="/current_events/" class="nav-link">Current Bookings</a></li>
           {% else %}
-          <li class="nav-item"><a href="/create_events/" class="nav-link">New Event</a></li>
+          <li><a href="/create_events/" class="nav-link active">New Event</a></li>
           {% endif %}
 
           <li class="nav-item"><a href="/logout/" class="nav-link text-danger">Logout</a></li>
