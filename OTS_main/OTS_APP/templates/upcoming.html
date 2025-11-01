@@ -15,44 +15,42 @@
   <body>
     {% if user.is_authenticated %}
     <div class="container">
-      <header
-        class="d-flex flex-wrap justify-content-center py-3 border-bottom"
-      >
-        <a
-          href="/"
-          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
-        >
-          <svg class="bi me-2" width="40" height="32">
+          <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm"
+    >
+      <div class="container">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+          <svg class="bi me-2" width="32" height="32">
             <use xlink:href="#bootstrap"></use>
           </svg>
-          <span class="fs-4">Home</span>
+          <span>HOME</span>
         </a>
+
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a href="/" class="nav-link" aria-current="page">Home</a>
+          <li><a href="/" class="nav-link">Home</a>
           </li>
-          <li class="nav-item">
-            <a href="upcoming_events/" class="nav-link active"
-              >Upcoming Events</a
-            >
+          <li>
+            <a href="/upcoming_events/" class="nav-link active">Upcoming Events</a>
           </li>
-          <!--Display different options for user and manager -->
+
           {% if user.user_type == "user" %}
           <li class="nav-item">
             <a href="/current_events/" class="nav-link">Current Bookings</a>
           </li>
           {% else %}
           <li class="nav-item">
-            <a href="/create_events/" class="nav-link">New Event </a>
+            <a href="/create_events/" class="nav-link">New Event</a>
           </li>
           {% endif %}
 
           <li class="nav-item">
-            <a href="/logout/" class="nav-link">Log Out</a>
+            <a href="/logout/" class="nav-link text-danger">Logout</a>
           </li>
         </ul>
-      </header>
-    </div>
+      </div>
+    </nav>
+
     <!-- Intro -->
     <div class="bg-light">
       <div class="py-5 text-center container">
