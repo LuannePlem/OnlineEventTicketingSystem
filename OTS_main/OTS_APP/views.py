@@ -129,17 +129,17 @@ def landingPage(request):
 
 def upcoming(request):
     if request.method == "POST":
-        #book event
         user = request.user
         event_id = request.POST.get('event_id')
         event = get_object_or_404(Event, id=event_id)
         action_type = request.POST.get('action_type')
         
+        # --- BOOK EVENT ---
         if action_type == "book_event":
             seats = 1
             if seats > event.available_seats:
                 messages.error(request, "Not enough seats available.")
-                return redirect("/current_events/")
+                return redirect("upcoming")
             
              # Create the booking
              
@@ -148,25 +148,62 @@ def upcoming(request):
             event=event,
             seats_booked=seats
             )
+            
+            Event.objects.filter(id=event.id).update(  
+                available_seats=event.available_seats - seats
+            )
+            
+             # Success message
             messages.success(request, f"Successfully booked {seats} seat(s) for {event.event_title}!")
   
-            return redirect("/current_events/")
+            return redirect("upcoming")
+        
+        if action_type == "cancel_event":
+            # Cancel booking
+            booking = Booking.objects.filter(user=user, event=event).first()
+            if booking:
+                booking.delete()
+                messages.success(request, f"Successfully canceled booking for {event.event_title}.")
+            else:
+                messages.error(request, "No booking found to cancel.")
+            return redirect("upcoming")
+            
+        
     current_user = request.user
     events = Event.objects.all
     bookings = Booking.objects.filter(user=request.user)
+    booking_ids = bookings.values_list('event_id', flat=True)
     context = {
         'user': current_user,
         'events': events,
-        'bookings': bookings
+        'booking_ids': booking_ids
     }
     
     return render(request, "upcoming.html", context)
 
 def current(request):
     
+    if request.method == "POST":
+        user = request.user
+        event_id = request.POST.get('event_id')
+        event = get_object_or_404(Event, id=event_id)
+        action_type = request.POST.get('action_type')
+        
+        if action_type == "cancel_event":
+            # Cancel booking
+            booking = Booking.objects.filter(user=user, event=event).first()
+            if booking:
+                booking.delete()
+                messages.success(request, f"Successfully canceled booking for {event.event_title}.")
+            else:
+                messages.error(request, "No booking found to cancel.")
+            return redirect("current")
+
+            
     current_user = request.user
     events = Event.objects.all()
     bookings = Booking.objects.filter(user=request.user)
+    
     context = {
         'user': current_user,
         'events': events,
