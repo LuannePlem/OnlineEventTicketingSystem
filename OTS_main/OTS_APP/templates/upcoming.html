@@ -147,10 +147,7 @@
               <button class="btn" disabled>Sold Out</button>
               {% endif %}
             </form>
-            {% endif%}
-            <button type="button" class="btn m-3 btn-lg btn-outline-primary">
-              Book Event
-            </button>
+    
             {% elif user == event.creator %}
             <!-- Edit Event Button -->
             <button type="button" class="btn btn-lg m-3 btn-outline-primary"><a href="{% url 'editEvent' event.id %}" class="nav-link">
@@ -161,8 +158,8 @@
                 Delete Event
               </a>
               </button>
- =           {% endif%}
-          </div>
+            {% endif%}
+          </div> 
         </div>
       </div>
       {% endfor %}

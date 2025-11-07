@@ -164,6 +164,9 @@ def upcoming(request):
             if booking:
                 booking.delete()
                 messages.success(request, f"Successfully canceled booking for {event.event_title}.")
+                Event.objects.filter(id=event.id).update(  
+                available_seats=event.available_seats + 1
+                )
             else:
                 messages.error(request, "No booking found to cancel.")
             return redirect("upcoming")
@@ -195,6 +198,9 @@ def current(request):
             if booking:
                 booking.delete()
                 messages.success(request, f"Successfully canceled booking for {event.event_title}.")
+                Event.objects.filter(id=event.id).update(  
+                    available_seats=event.available_seats + 1
+                )
             else:
                 messages.error(request, "No booking found to cancel.")
             return redirect("current")
