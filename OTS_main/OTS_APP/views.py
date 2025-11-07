@@ -138,11 +138,36 @@ def upcoming(request):
     return render(request, "upcoming.html", context)
 
 def current(request):
+    if request.method == "POST":
+        #book event
+        user = request.user
+        event_id = request.POST.get('event_id')
+        event = get_object_or_404(Event, id=event_id)
+        action_type = request.POST.get('action_type')
+        
+        if action_type == "book_event":
+            seats = 1
+            if seats > event.available_seats():
+                messages.error(request, "Not enough seats available.")
+                return redirect("/current_events/")
+            
+             # Create the booking
+             
+            Booking.objects.create(
+            user=user,
+            event=event,
+            seats_booked=seats
+             )
+            messages.success(request, f"Successfully booked {seats} seat(s) for {event.event_name}!")
+  
+            return redirect("/current_events/")
     current_user = request.user
-    events = Event.objects
+    events = Event.objects.all()
+    bookings = Booking.objects.filter(user=request.user)
     context = {
         'user': current_user,
-        'events': events
+        'events': events,
+        'bookings': bookings
     }
     
     return render(request, "current.html", context)
