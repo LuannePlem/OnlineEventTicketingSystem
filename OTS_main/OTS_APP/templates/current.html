@@ -51,5 +51,61 @@
       </div>
     </nav>
   </body>
-  current bookings {%endif%}
+
+  <!-- Intro -->
+  <div class="bg-light">
+    <div class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Current Bookings</h1>
+          <p class="lead text-muted">
+            Here, you can find all the events you are currently signed up for!
+          </p>
+          <p class="small text-muted">
+            You can view all available events in the 'Upcoming Events' section.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- Display Available Events -->
+    <div class="row row-cols-1 row-cols-md-3 mb-3 p-5 text-center">
+      {% for booking in bookings %}
+      <div class="col mt-3">
+        <div class="card mb-4 rounded-3 border-0 shadow-sm bg-light">
+          <div class="card-header border-0 py-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>{{ booking.event.event_date }}</div>
+              <div>{{ booking.event.event_time }}</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title">{{ booking.event.event_title }}</h1>
+            <p class="px-5">{{ booking.event.event_subtitle }}</p>
+      
+            <div class="d-flex justify-content-center">
+              <ul class="list-unstyled mt-3 mb-4 text-start">
+                <li>
+                  <b>Time:</b> {{ booking.event.event_date }} {{booking.event.event_time}}
+                </li>
+                <li><b>Location:</b> {{ booking.event.event_location }}</li>
+                <li><b>Available Seats:</b> {{ booking.event.available_seats }}</li>
+              </ul>
+            </div>
+     
+            {% comment %} <form method="POST" action="{% url 'upcoming' %}">
+              {% csrf_token %}
+              <input type="hidden" name="event" value="{{ event }}" />
+              <button type="submit" class="btn m-3 btn-lg btn-outline-primary">
+                Book Event
+              </button>
+            </form> {% endcomment %}
+      
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+  {%endif%}
 </html>

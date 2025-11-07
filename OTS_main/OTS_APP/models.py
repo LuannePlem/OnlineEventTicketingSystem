@@ -78,4 +78,4 @@ class Booking(models.Model):
     seats_booked = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.user.name} booked {self.seats_booked} seats for {self.event.event_name}"
+        return f"{self.user.username} booked {self.seats_booked} seats for {self.event.event_title}"
