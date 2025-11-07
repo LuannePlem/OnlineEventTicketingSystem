@@ -14,8 +14,7 @@
   </head>
   <body>
     {% if user.is_authenticated %}
-    <div class="container">
-          <!-- Navbar -->
+    <!-- Navbar -->
     <nav
       class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm"
     >
@@ -28,10 +27,11 @@
         </a>
 
         <ul class="nav nav-pills">
-          <li><a href="/" class="nav-link">Home</a>
-          </li>
+          <li><a href="/" class="nav-link">Home</a></li>
           <li>
-            <a href="/upcoming_events/" class="nav-link active">Upcoming Events</a>
+            <a href="/upcoming_events/" class="nav-link active"
+              >Upcoming Events</a
+            >
           </li>
 
           {% if user.user_type == "user" %}
