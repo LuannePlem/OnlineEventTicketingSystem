@@ -128,16 +128,6 @@ def landingPage(request):
     return render(request, "landingPage.html")
 
 def upcoming(request):
-    current_user = request.user
-    events = Event.objects.all
-    context = {
-        'user': current_user,
-        'events': events,
-    }
-    
-    return render(request, "upcoming.html", context)
-
-def current(request):
     if request.method == "POST":
         #book event
         user = request.user
@@ -147,7 +137,7 @@ def current(request):
         
         if action_type == "book_event":
             seats = 1
-            if seats > event.available_seats():
+            if seats > event.available_seats:
                 messages.error(request, "Not enough seats available.")
                 return redirect("/current_events/")
             
@@ -157,10 +147,23 @@ def current(request):
             user=user,
             event=event,
             seats_booked=seats
-             )
-            messages.success(request, f"Successfully booked {seats} seat(s) for {event.event_name}!")
+            )
+            messages.success(request, f"Successfully booked {seats} seat(s) for {event.event_title}!")
   
             return redirect("/current_events/")
+    current_user = request.user
+    events = Event.objects.all
+    bookings = Booking.objects.filter(user=request.user)
+    context = {
+        'user': current_user,
+        'events': events,
+        'bookings': bookings
+    }
+    
+    return render(request, "upcoming.html", context)
+
+def current(request):
+    
     current_user = request.user
     events = Event.objects.all()
     bookings = Booking.objects.filter(user=request.user)
