@@ -1,1 +1,189 @@
-Edit Events
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'OTS_APP/style.css' %}" />
+    <title>Edit Event</title>
+
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+
+      .profile-card {
+        max-width: 600px;
+        margin: 3rem auto;
+        background: rgb(157, 185, 156);
+        border-radius: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        padding: 2rem;
+      }
+
+      .pmargin {
+        margin-bottom: 0.4rem;
+        font-size: 1.05rem;
+      }
+
+      .navbar-brand span {
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    {% if user.is_authenticated %}
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+      <div class="container">
+        <a href="/" class="navbar-brand d-flex align-items-center">
+          <span>HOME</span>
+        </a>
+
+        <ul class="nav nav-pills">
+          <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+          <li class="nav-item">
+            <a href="/upcoming_events/" class="nav-link">Upcoming Events</a>
+          </li>
+
+          {% if user.user_type == "user" %}
+          <li class="nav-item">
+            <a href="/current_events/" class="nav-link">Current Bookings</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="/create_events/" class="nav-link">New Event</a>
+          </li>
+          {% endif %}
+
+          <li class="nav-item">
+            <a href="/logout/" class="nav-link text-danger">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="text-center mt-5">
+      <h1 class="display-5 fw-bold">Editing {{event.event_title}}</h1>
+      <p class="text-muted">
+        “The secret to editing your work is simple: you need to become its reader instead of its writer.”
+      </p>
+      <p class="text-muted">– Zadie Smith</p>
+    </div>
+
+    <!-- Edit Form Card -->
+    <div class="profile-card">
+      {% if event.creator == user %}
+      <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="event_title" class="form-label">Event Title</label>
+          <input
+            type="text"
+            id="event_title"
+            name="event_title"
+            class="form-control"
+            value="{{ event.event_title }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="event_subtitle" class="form-label">Event Subtitle</label>
+          <input
+            type="text"
+            id="event_subtitle"
+            name="event_subtitle"
+            class="form-control"
+            value="{{ event.event_subtitle }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="event_date" class="form-label">Event Date</label>
+          <input
+            type="date"
+            id="event_date"
+            name="event_date"
+            class="form-control"
+            value="{{ event.event_date|date:'Y-m-d' }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="event_time" class="form-label">Event Time</label>
+          <input
+            type="time"
+            id="event_time"
+            name="event_time"
+            class="form-control"
+            value="{{ event.event_time|time:'H:i' }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="event_price" class="form-label">Event Price ($)</label>
+          <input
+            type="number"
+            id="event_price"
+            name="event_price"
+            step="0.01"
+            class="form-control"
+            value="{{ event.event_price }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="event_location" class="form-label">Event Location</label>
+          <input
+            type="text"
+            id="event_location"
+            name="event_location"
+            class="form-control"
+            value="{{ event.event_location }}"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="available_seats" class="form-label">Available Seats</label>
+          <input
+            type="number"
+            id="available_seats"
+            name="available_seats"
+            class="form-control"
+            value="{{ event.available_seats }}"
+            required
+          />
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-dark px-5">Save Changes</button>
+          <a href="/landingPage/" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
+      </form>
+      {% else %}
+      <div class="alert alert-danger text-center">
+        You do not have permission to edit this event.
+      </div>
+      {% endif %}
+    </div>
+
+    {% endif %}
+  </body>
+</html>

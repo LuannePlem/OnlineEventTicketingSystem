@@ -1,7 +1,8 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 
@@ -191,8 +192,35 @@ def createEvent(request):
 
     return render(request, "createEvent.html")
 
+def editEvent(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
 
-def editEvent(request):
-    return render(request, "editEvent.html")
+    # Only creator can edit
+    if request.user != event.creator:
+        return redirect('/')
+
+    if request.method == 'POST':
+        # Get values from the form
+        event.event_title = request.POST.get('event_title', event.event_title)
+        event.event_subtitle = request.POST.get('event_subtitle', event.event_subtitle)
+        event.event_date = request.POST.get('event_date', event.event_date)
+        event.event_time = request.POST.get('event_time', event.event_time)
+        event.event_price = request.POST.get('event_price', event.event_price)
+        event.event_location = request.POST.get('event_location', event.event_location)
+        event.available_seats = request.POST.get('available_seats', event.available_seats)
+
+        # Convert date and time strings to proper objects
+        try:
+            event.event_date = datetime.strptime(request.POST['event_date'], '%Y-%m-%d').date()
+            event.event_time = datetime.strptime(request.POST['event_time'], '%H:%M').time()
+            event.event_price = float(request.POST['event_price'])
+            event.available_seats = int(request.POST['available_seats'])
+        except (ValueError, KeyError):
+            pass  # optionally handle errors
+
+        event.save()
+        return redirect('/upcoming_events/')
+
+    return render(request, "editEvent.html", {'event': event})
 
 

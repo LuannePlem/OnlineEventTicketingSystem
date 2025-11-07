@@ -90,9 +90,8 @@
             </h1>
             <div class="d-flex justify-content-center">
               <ul class="list-unstyled mt-3 mb-4 text-start">
-                <li>
-                  <b>Time:</b> {{ event.event_date }} {{event.event_time}}
-                </li>
+                <li><b>Date:</b> {{ event.event_date }}</li>
+                <li><b>Time:</b> {{event.event_time}}</li>
                 <li><b>Location:</b> {{ event.event_location }}</li>
                 <li><b>Available Seats:</b> {{ event.available_seats }}</li>
               </ul>
@@ -100,6 +99,10 @@
             {% if user.user_type == "user" %}
             <button type="button" class="btn m-3 btn-lg btn-outline-primary">
               Book Event
+            </button>
+            {% elif request.user == event.creator %}
+            <button type="button" class = "btn m-3 btn-lg btn-outline-primary">
+              <a href="/edit_events/{{ event.id }}/" class="nav-link">Edit Event</a>
             </button>
             {% endif%}
           </div>
