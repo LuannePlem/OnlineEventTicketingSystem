@@ -21,6 +21,7 @@ urlpatterns = [
     path('individual_event/', views.individualEvent, name="individualEvent"),
     path('create_events/', views.createEvent, name="createEvent"),
     path('edit_events/<int:event_id>/', views.editEvent, name="editEvent"),
+    path("delete_event/<int:event_id>/", views.delete_event, name="deleteEvent")
 ] 
 #  Serve media files if DEBUG is True (development mode)
 if settings.DEBUG:

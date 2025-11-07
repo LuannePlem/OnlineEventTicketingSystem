@@ -1,3 +1,25 @@
+<style>
+  body {
+    background-color: #ffffff;
+  }
+  .profile-card {
+    max-width: 600px;
+    margin: 3rem auto;
+    background: rgb(157, 185, 156);
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+  }
+  .pmargin {
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+  }
+  .navbar-brand span {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+</style>
+
 <html lang="en" data-bs-theme="light">
   <head>
     <meta charset="UTF-8" />
@@ -96,6 +118,7 @@
                 <li><b>Available Seats:</b> {{ event.available_seats }}</li>
               </ul>
             </div>
+          
             {% if user.user_type == "user" %}
             <form method="POST" action="{% url 'upcoming' %}">
               {% csrf_token %} {% if event.id in booking_ids %}
@@ -125,12 +148,25 @@
               {% endif %}
             </form>
             {% endif%}
+            <button type="button" class="btn m-3 btn-lg btn-outline-primary">
+              Book Event
+            </button>
+            {% elif user == event.creator %}
+            <!-- Edit Event Button -->
+            <button type="button" class="btn btn-lg m-3 btn-outline-primary"><a href="{% url 'editEvent' event.id %}" class="nav-link">
+                Edit Event</a>
+              <!-- Delete Event Button -->
+              <button type="button" class="btn btn-lg m-3 btn-outline-danger">
+              <a href="{% url 'deleteEvent' event.id %}" class="nav-link" >
+                Delete Event
+              </a>
+              </button>
+ =           {% endif%}
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
     {% endif %}
   </body>
 </html>
