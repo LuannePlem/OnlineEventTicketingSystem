@@ -118,6 +118,7 @@
                 <li><b>Available Seats:</b> {{ event.available_seats }}</li>
               </ul>
             </div>
+          
             {% if user.user_type == "user" %}
             <button type="button" class="btn m-3 btn-lg btn-outline-primary">
               Book Event
@@ -132,14 +133,12 @@
                 Delete Event
               </a>
               </button>
-            </div>
-            {% endif%}
+ =           {% endif%}
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
-
     {% endif %}
   </body>
 </html>
