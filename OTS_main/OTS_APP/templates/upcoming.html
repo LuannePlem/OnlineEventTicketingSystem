@@ -1,3 +1,25 @@
+<style>
+  body {
+    background-color: #ffffff;
+  }
+  .profile-card {
+    max-width: 600px;
+    margin: 3rem auto;
+    background: rgb(157, 185, 156);
+    border-radius: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+  }
+  .pmargin {
+    margin-bottom: 0.4rem;
+    font-size: 1.05rem;
+  }
+  .navbar-brand span {
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+</style>
+
 <html lang="en" data-bs-theme="light">
   <head>
     <meta charset="UTF-8" />
@@ -100,10 +122,17 @@
             <button type="button" class="btn m-3 btn-lg btn-outline-primary">
               Book Event
             </button>
-            {%elif request.user == event.creator %}
-            <button type="button" class="btn m-3 btn-lg btn-outline-primary">
-              <a href="{% url 'editEvent' event.id %}" class="nav-link">Edit Event</a>
-            </button>
+            {% elif user == event.creator %}
+            <!-- Edit Event Button -->
+            <button type="button" class="btn btn-lg m-3 btn-outline-primary"><a href="{% url 'editEvent' event.id %}" class="nav-link">
+                Edit Event</a>
+              <!-- Delete Event Button -->
+              <button type="button" class="btn btn-lg m-3 btn-outline-danger">
+              <a href="{% url 'deleteEvent' event.id %}" class="nav-link" >
+                Delete Event
+              </a>
+              </button>
+            </div>
             {% endif%}
           </div>
         </div>
