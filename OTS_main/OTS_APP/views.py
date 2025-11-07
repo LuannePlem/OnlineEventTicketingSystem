@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -217,6 +217,7 @@ def createEvent(request):
 
     return render(request, "createEvent.html")
 
+@login_required
 def editEvent(request, event_id):
     event = get_object_or_404(Event, id=event_id)
 
@@ -248,4 +249,17 @@ def editEvent(request, event_id):
 
     return render(request, "editEvent.html", {'event': event})
 
+@login_required
+def delete_event(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
 
+    # Only the creator can delete their own event
+    if event.creator != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this event.")
+
+    if request.method == "POST":
+        event.delete()
+        return redirect("/upcoming_events/")  # or wherever you want to send them after deletion
+
+    # optional: confirm deletion page
+    return render(request, "confirmDelete.html", {"event": event})
