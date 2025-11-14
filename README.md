@@ -103,11 +103,11 @@ Contact Us
  
 # How to run the project (Dev.)
 
-## 1. Download a local copy of the project**
+## 1. Download a local copy of the project
 
 		wget https://github.com/LuannePlem/OnlineEventTicketingSystem.git
 
-## 2. Set up the Database (This bit is complicated, sorry)**
+## 2. Set up the Database (This bit is complicated, sorry)
 
    		https://docs.djangoproject.com/en/5.2/ref/databases/ 
 
@@ -168,7 +168,7 @@ Then run the following:
 ```
 
 
-### 4. Run the server**
+### 4. Run the server
 
 	Ensure you are in the OTS_MAIN Folder
 
