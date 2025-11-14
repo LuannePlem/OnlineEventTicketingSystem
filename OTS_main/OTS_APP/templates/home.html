@@ -50,8 +50,7 @@
         </a>
 
         <ul class="nav nav-pills">
-          <li><a href="/" class="nav-link active">Home</a>
-          </li>
+          <li><a href="/" class="nav-link active">Home</a></li>
           <li class="nav-item">
             <a href="/upcoming_events/" class="nav-link">Upcoming Events</a>
           </li>
@@ -101,9 +100,15 @@
     {% else %}
     <!-- Not logged in -->
     <div class="container text-center mt-5">
+      {% load static %}
+      <img src="{% static 'OTS_APP/img/calendar2.png' %}" style="width: 20%" />
       <h1 class="display-4 mb-3">Welcome to Eventify</h1>
-      <p class="lead text-muted mb-4">Discover and book exciting events near you.</p>
-      <a href="/register/" class="btn btn-outline-primary btn-lg me-2">Register</a>
+      <p class="lead text-muted mb-4">
+        Discover and book exciting events near you.
+      </p>
+      <a href="/register/" class="btn btn-outline-primary btn-lg me-2"
+        >Register</a
+      >
       <a href="/login/" class="btn btn-primary btn-lg">Login</a>
     </div>
     {% endif %}
