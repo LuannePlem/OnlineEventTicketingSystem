@@ -61,7 +61,7 @@ class Event(models.Model):
     def isDatePassed(self) -> bool:
         currentDate = datetime.now().date()
         currentTime = datetime.now().time()
-        if currentDate > self.event_date or (currentDate == self.date and currentTime > self.event_time):
+        if currentDate > self.event_date or (currentDate == self.event_date and currentTime > self.event_time):
             return True
         else:
             return False
