@@ -103,11 +103,11 @@ Contact Us
  
 # How to run the project (Dev.)
 
-**1. Download a local copy of the project**
+## 1. Download a local copy of the project**
 
 		wget https://github.com/LuannePlem/OnlineEventTicketingSystem.git
 
-**2. Set up the Database (This bit is complicated, sorry)**
+## 2. Set up the Database (This bit is complicated, sorry)**
 
    		https://docs.djangoproject.com/en/5.2/ref/databases/ 
 
@@ -117,7 +117,8 @@ Contact Us
    2. Create and connect your own SQL database
    3. Create a **completely Identical** mySQL database that matches the code in Github
   
-### Option 1
+**Option 1**
+
 Use the automatic Django database.
 In `OTS_MAIN/OTS/settings.py`, change the database settings to look like this:
 ```
@@ -133,7 +134,8 @@ Then run the following:
 	python manage.py makemigrations
 	python manage.py migrate
 ```
-### Option 2
+**Option 2**
+
 Creating your own SQL Database however you would like.
 Then, in `OTS_MAIN/OTS/settings.py`, edit the database settings
 ```
@@ -154,7 +156,8 @@ Then run the following:
 	python manage.py migrate
 ```
 
-### Option 3
+**Option 3**
+
 Create a new SQL database ensuring that it's properties match the settings in 
 `OTS_MAIN/OTS/settings.py` ***exactly***
 
@@ -165,7 +168,7 @@ Then run the following:
 ```
 
 
-**4. Run the server**
+### 4. Run the server**
 
 	Ensure you are in the OTS_MAIN Folder
 
