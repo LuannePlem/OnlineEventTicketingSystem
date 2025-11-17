@@ -173,7 +173,7 @@ def upcoming(request):
             
         
     current_user = request.user
-    events = Event.objects.all
+    events = Event.objects.all().order_by('event_date').order_by('event_time')
     bookings = Booking.objects.filter(user=request.user)
     booking_ids = bookings.values_list('event_id', flat=True)
     context = {
@@ -207,7 +207,7 @@ def current(request):
 
             
     current_user = request.user
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('event_date').order_by('event_time')
     bookings = Booking.objects.filter(user=request.user)
     
     context = {
