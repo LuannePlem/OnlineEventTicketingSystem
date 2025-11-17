@@ -117,7 +117,7 @@ Contact Us
    2. Create and connect your own SQL database
    3. Create a **completely Identical** mySQL database that matches the code in Github
   
-**Option 1**
+**Option 1** (The Easiest Option)
 
 Use the automatic Django database.
 In `OTS_MAIN/OTS/settings.py`, change the database settings to look like this:
@@ -129,6 +129,11 @@ In `OTS_MAIN/OTS/settings.py`, change the database settings to look like this:
         }
     }
 ```
+
+Then, you will need to remove the old migration files. Delete everything in the `migrations` folder except `__init__.py`:
+
+	find OTS_APP/migrations -type f ! -name "__init__.py" -delete
+
 Then run the following:
 ```
 	python manage.py makemigrations
@@ -150,6 +155,11 @@ Then, in `OTS_MAIN/OTS/settings.py`, edit the database settings
 	      }
 	}
 ```
+
+Then, you will need to remove the old migration files. Delete everything in the `migrations` folder except `__init__.py`:
+
+	find OTS_APP/migrations -type f ! -name "__init__.py" -delete
+	
 Then run the following:
 ```
 	python manage.py makemigrations
@@ -159,8 +169,13 @@ Then run the following:
 **Option 3**
 
 Create a new SQL database ensuring that it's properties match the settings in 
-`OTS_MAIN/OTS/settings.py` ***exactly***
+`OTS_MAIN/OTS/settings.py` ***exactly*** 
 
+
+Then, you will need to remove the old migration files. Delete everything in the `migrations` folder except `__init__.py`:
+
+	find OTS_APP/migrations -type f ! -name "__init__.py" -delete
+	
 Then run the following:
 ```
 	python manage.py makemigrations
@@ -170,11 +185,8 @@ Then run the following:
 
 ### 4. Run the server
 
-	Ensure you are in the OTS_MAIN Folder
+Ensure you are in the OTS_MAIN Folder
 
    		python manage.py runserver
-   or
-   
-   		python3 manage.py runserver
-  
+
 
