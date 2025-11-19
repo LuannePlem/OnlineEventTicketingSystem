@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from .models import *
 from datetime import datetime, date, time, timedelta
-from django.db import IntegrityError
-
+from django.db import IntegrityError, transaction
+from django.core.exceptions import ValidationError
 """
 Testing document for Online Event Ticket Booking System
 
@@ -12,13 +12,7 @@ Tests:
 1. User Registration and Authentication
 2. Admin Registration and Authentication
 3. Event Models 
-4. Ticket Purchase Workflow
-    1. User can view event list
-    2. User can view event detail
-    3. User can add tickets to cart
-    4. Payment page loads correctly
-    5. Checkout reduces event capacity
-    6. Prevent double booking (race condition) 
+4. Testing views
 5. Views
 
 
@@ -26,12 +20,6 @@ Tests:
 # ==========================================================================
 # 1. User Registration & Authetication Tests
 # ==========================
-User = get_user_model()
-
-from django.test import TestCase
-from django.core.exceptions import ValidationError
-from django.contrib.auth import get_user_model
-
 User = get_user_model()
 
 class UserModelTests(TestCase):
@@ -273,7 +261,7 @@ class BookingModelTests(TestCase):
 
     def setUp(self):
         """Common setup for all booking tests."""
-        self.user = User.objects.create_user(username="john", password="123")
+        self.user = User.objects.create_user(username="john", password="123", age=25)
         self.event = Event.objects.create(
             event_title="Concert",
             event_subtitle="Live Music",
@@ -306,19 +294,25 @@ class BookingModelTests(TestCase):
         self.assertEqual(booking.seats_booked, 3)
 
     def test_unique_together_user_event(self):
-        """User cannot book same event twice."""
-        Booking.objects.create(
-            user=self.user,
-            event=self.event,
-            seats_booked=1
+        # reuse self.user created in setUp
+        event = Event.objects.create(
+            event_title="Test Event",
+            event_subtitle="Sub",
+            event_date=date(2025, 1, 1),
+            event_time=time(10, 0),
+            event_price=10.0,
+            event_location="Location",
+            available_seats=100,
+            creator=self.user
         )
 
+        b = Booking(user=self.user, event=self.event, seats_booked=1)
+        b.save()
+
+        duplicate = Booking(user=self.user, event=self.event, seats_booked=2)
         with self.assertRaises(IntegrityError):
-            Booking.objects.create(
-                user=self.user,
-                event=self.event,
-                seats_booked=2
-            )
+            with transaction.atomic():
+                duplicate.save()
 
     def test_booking_deleted_when_user_deleted(self):
         booking = Booking.objects.create(
@@ -341,3 +335,98 @@ class BookingModelTests(TestCase):
         self.event.delete()
 
         self.assertEqual(Booking.objects.count(), 0)
+
+# ===========================================================================
+# 4. Test views
+# ================================
+class AuthViewTests(TestCase):
+
+    def setUp(self):
+        self.password = "testpass1223"
+        self.user = User.objects.create_user(
+            username="john",
+            password=self.password,
+            age=21,
+            user_type="user"
+        )
+
+    # ----------------------
+    # LOGIN VIEW TESTS
+    # ----------------------
+
+    def test_login_page_loads(self):
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "login.html")
+
+    def test_login_success(self):
+        response = self.client.post(reverse("login"), {
+            "username": "john",
+            "password": self.password
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/")     # redirect home
+        self.assertTrue("_auth_user_id" in self.client.session)
+
+    def test_login_invalid_username(self):
+        response = self.client.post(reverse("login"), {
+            "username": "not_user",
+            "password": "abc123"
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/login/")
+
+    def test_login_invalid_password(self):
+        response = self.client.post(reverse("login"), {
+            "username": "john",
+            "password": "wrongpass"
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/login/")
+
+    # ----------------------
+    # REGISTER VIEW TESTS
+    # ----------------------
+
+    def test_register_page_loads(self):
+        response = self.client.get(reverse("register"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "register.html")
+
+    def test_register_new_user(self):
+        response = self.client.post(reverse("register"), {
+            "first_name": "Alice",
+            "last_name": "Smith",
+            "email": "alice@example.com",
+            "username": "alice",
+            "password": "mypassword",
+            "age": "22",
+            "user_type": "user"
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/login/")
+
+        # user actually exists
+        self.assertTrue(User.objects.filter(username="alice").exists())
+
+    def test_register_duplicate_username(self):
+        response = self.client.post(reverse("register"), {
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "john2@example.com",
+            "username": "john",  # already exists
+            "password": "123",
+            "age": "22",
+            "user_type": "user"
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, "/register/")
+
+    # ----------------------
+    # HOME VIEW TEST
+    # ----------------------
+
+    def test_home_view_renders(self):
+        response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "home.html")
