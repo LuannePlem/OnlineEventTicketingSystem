@@ -125,6 +125,7 @@ def logout_view(request):
     return render(request, 'logout.html', context)
 
 
+@login_required(login_url='login')
 def upcoming(request):
     if request.method == "POST":
         user = request.user
@@ -182,6 +183,7 @@ def upcoming(request):
     
     return render(request, "upcoming.html", context)
 
+@login_required(login_url='login')
 def current(request):
     
     if request.method == "POST":
@@ -217,6 +219,7 @@ def current(request):
     return render(request, "current.html", context)
 
 
+@login_required(login_url='login')
 def createEvent(request):
     if request.method == "POST":
         event_title = request.POST.get("event_title")
