@@ -124,9 +124,11 @@ def logout_view(request):
         return redirect('/')
     return render(request, 'logout.html', context)
 
+@login_required(login_url='login')
 def landingPage(request):
     return render(request, "landingPage.html")
 
+@login_required(login_url='login')
 def upcoming(request):
     if request.method == "POST":
         user = request.user
@@ -184,6 +186,7 @@ def upcoming(request):
     
     return render(request, "upcoming.html", context)
 
+@login_required(login_url='login')
 def current(request):
     
     if request.method == "POST":
@@ -221,6 +224,7 @@ def current(request):
 def individualEvent(request):
     return render(request, "individualEvent.html")
 
+@login_required(login_url='login')
 def createEvent(request):
     if request.method == "POST":
         event_title = request.POST.get("event_title")
