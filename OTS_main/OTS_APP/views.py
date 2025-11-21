@@ -124,8 +124,6 @@ def logout_view(request):
         return redirect('/')
     return render(request, 'logout.html', context)
 
-def landingPage(request):
-    return render(request, "landingPage.html")
 
 def upcoming(request):
     if request.method == "POST":
@@ -218,8 +216,6 @@ def current(request):
     
     return render(request, "current.html", context)
 
-def individualEvent(request):
-    return render(request, "individualEvent.html")
 
 def createEvent(request):
     if request.method == "POST":
