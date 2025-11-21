@@ -1,10 +1,12 @@
 from django.test import TestCase
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.contrib.auth import get_user_model
 from .models import *
 from datetime import datetime, date, time, timedelta
 from django.db import IntegrityError, transaction
 from django.core.exceptions import ValidationError
+from OTS_APP import views
+
 """
 Testing document for Online Event Ticket Booking System
 
@@ -13,8 +15,6 @@ Tests:
 2. Admin Registration and Authentication
 3. Event Models 
 4. Testing views
-5. Views
-
 
 """
 # ==========================================================================
@@ -430,3 +430,106 @@ class AuthViewTests(TestCase):
         response = self.client.get(reverse("home"))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "home.html")
+
+# ===========================================================================
+# 5. Testing URLS
+# ================================
+class URLTests(TestCase):
+
+    def setUp(self):
+        # Create a regular user
+        self.user = User.objects.create_user(
+            username="testuser",
+            password="12345",
+            age=20
+        )
+
+        # Create event for parameterized URL tests
+        self.event = Event.objects.create(
+            event_title="Test Event",
+            event_subtitle="Sub",
+            event_date=date.today(),
+            event_time=time(12, 0),
+            event_price=10,
+            event_location="Here",
+            available_seats=100,
+            creator=self.user
+        )
+
+    # -------------------------------------------------
+    # BASIC PUBLIC URLS (no login required)
+    # -------------------------------------------------
+    def test_home_url_resolves(self):
+        self.assertEqual(resolve("/").func, views.home)
+
+    def test_home_returns_200(self):
+        response = self.client.get(reverse("home"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_login_url(self):
+        response = self.client.get(reverse("login"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_register_url(self):
+        response = self.client.get(reverse("register"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_upcoming_events_url(self):
+        # create user
+        user = User.objects.create_user(username="jimmie", password="jimmie22", age=22)
+
+        # login first
+        self.client.login(username="jimmie", password="jimmie22")
+
+        # access page as authenticated user
+        response = self.client.get(reverse("upcoming"))
+
+        # now this should be 200
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_current_events_url(self):
+        # Create user
+        user = User.objects.create_user(username="james", password="james3", age=22)
+
+        # Log them in
+        self.client.login(username="james", password="james3")
+
+        # Request URL
+        response = self.client.get(reverse("current"))
+
+        # Should now be OK
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_individual_event_url(self):
+        response = self.client.get(reverse("individualEvent"))
+        self.assertEqual(response.status_code, 200)
+
+    # -------------------------------------------------
+    # URLS THAT REQUIRE LOGIN
+    # -------------------------------------------------
+    def test_create_event_requires_login(self):
+        response = self.client.get(reverse("createEvent"))
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+
+    def test_edit_event_requires_login(self):
+        response = self.client.get(reverse("editEvent", args=[self.event.id]))
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_event_requires_login(self):
+        response = self.client.get(reverse("deleteEvent", args=[self.event.id]))
+        self.assertEqual(response.status_code, 302)
+
+    # -------------------------------------------------
+    # LOGGED-IN USER ACCESS
+    # -------------------------------------------------
+    def test_logged_in_user_can_access_edit_event(self):
+        self.client.login(username="testuser", password="12345")
+        response = self.client.get(reverse("editEvent", args=[self.event.id]))
+        self.assertIn(response.status_code, [200, 403])
+
+    def test_logged_in_user_can_access_delete_event(self):
+        self.client.login(username="testuser", password="12345")
+        response = self.client.get(reverse("deleteEvent", args=[self.event.id]))
+        self.assertIn(response.status_code, [200, 403])
