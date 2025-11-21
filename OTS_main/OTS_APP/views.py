@@ -124,9 +124,6 @@ def logout_view(request):
         return redirect('/')
     return render(request, 'logout.html', context)
 
-@login_required(login_url='login')
-def landingPage(request):
-    return render(request, "landingPage.html")
 
 @login_required(login_url='login')
 def upcoming(request):
@@ -221,8 +218,6 @@ def current(request):
     
     return render(request, "current.html", context)
 
-def individualEvent(request):
-    return render(request, "individualEvent.html")
 
 @login_required(login_url='login')
 def createEvent(request):
