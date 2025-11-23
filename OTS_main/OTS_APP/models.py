@@ -12,12 +12,13 @@ class User(AbstractUser):
         ('user', 'User'),
         ('manager', 'Manager'),
     ]
+    
     user_type = models.CharField(
         max_length=20,
         choices=USER_TYPE_CHOICES,
         default='user'
     )
-    
+
     def __str__(self):
         return self.username
     
@@ -32,11 +33,6 @@ class Manager(User):
     
     def __str__(self):
         return f"Manager: {self.username}"
-
-# ----------------------------
-# Customers
-# ----------------------------
-# class Customers(User):
 
 # ----------------------------
 # Events table
@@ -58,6 +54,7 @@ class Event(models.Model):
         blank=True
     )
     
+    # Returns true if the event date and time has already passed
     def isDatePassed(self) -> bool:
         currentDate = datetime.now().date()
         currentTime = datetime.now().time()

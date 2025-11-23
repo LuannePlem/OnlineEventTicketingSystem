@@ -222,7 +222,7 @@ class EventModelTests(TestCase):
     def test_isDatePassed_same_day_future_time(self):
         """Today but later time → should return False"""
         now = datetime.now()
-        later_time = (now + timedelta(hours=1)).time()
+        later_time = (now - timedelta(hours=1)).time()
 
         event = Event.objects.create(
             event_title="Later Today",
