@@ -14,7 +14,6 @@ def home(request):
     } 
     return render(request, "home.html", context)
 
-
 def login_view(request):
      # Check if the HTTP request method is POST (form submission)
     if request.method == "POST":
@@ -38,6 +37,7 @@ def login_view(request):
             # Log in the user and redirect to the home page upon successful login
             login(request, user)
             return redirect('/')
+        
     current_user = request.user
     context = {
         'user': current_user,
@@ -113,6 +113,7 @@ def register(request):
     }
     # Render the registration page template (GET request)
     return render(request, 'register.html', context)
+
 
 def logout_view(request):
     current_user = request.user
